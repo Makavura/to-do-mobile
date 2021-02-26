@@ -5,9 +5,10 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import DoneToDoScreen from '../screens/DoneTodos';
+import TabTwoScreen from '../screens/PendingToDoScreen';
+import AddNewToDoScreen from '../screens/AddNewToDoScreen';
+import { BottomTabParamList, MiddleTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -16,20 +17,27 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Done"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
-        name="TabOne"
+        name="Done"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
+        name="AddNew"
+        component={MiddleTabNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="add" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="ToDo"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="list-circle-outline" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -51,12 +59,28 @@ function TabOneNavigator() {
     <TabOneStack.Navigator>
       <TabOneStack.Screen
         name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+        component={DoneToDoScreen}
+        options={{ headerTitle: 'Done Items' }}
       />
     </TabOneStack.Navigator>
   );
 }
+
+const MiddleTabStack = createStackNavigator<MiddleTabParamList>();
+
+
+function MiddleTabNavigator() {
+  return (
+    <MiddleTabStack.Navigator>
+      <MiddleTabStack.Screen
+        name="AddNewToDoScreen"
+        component={AddNewToDoScreen}
+        options={{ headerTitle: 'Add New Todo Item' }}
+      />
+    </MiddleTabStack.Navigator>
+  );
+}
+
 
 const TabTwoStack = createStackNavigator<TabTwoParamList>();
 
@@ -66,7 +90,7 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+        options={{ headerTitle: 'Pending Todos' }}
       />
     </TabTwoStack.Navigator>
   );

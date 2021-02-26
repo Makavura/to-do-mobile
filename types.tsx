@@ -4,8 +4,9 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
+  Done: undefined;
+  ToDo: undefined;
+  AddNew: undefined;
 };
 
 export type TabOneParamList = {
@@ -15,3 +16,19 @@ export type TabOneParamList = {
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
+
+export type MiddleTabParamList = {
+  AddNewToDoScreen: undefined;
+};
+
+export type ToDoEntry = {
+    "id": string,
+    "createdAt": string,
+    "avatar": string,
+    "task": string,
+    "done": boolean,
+    "completedAt": string,
+    "name": string,
+    "location": string,
+    "startsAt": string
+}
